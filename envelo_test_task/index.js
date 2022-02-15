@@ -42,7 +42,7 @@ function validateNumber(numberValue, codeValue) {
     codeValue.length !== 4
   ) {
     errorMessage.innerHTML =
-      "Number should contain 9 numbers and Code should contain 4 numbers!";
+      "Number should contain 9 numbers (e.g. 123456789) and Code should contain 4 numbers (e.g. 1234)!";
   } else {
     errorMessage.innerHTML = "";
     numberPassed = true;
