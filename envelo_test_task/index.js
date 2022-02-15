@@ -22,7 +22,16 @@ function toggleBorder(input) {
   } else {
     input.classList.remove("error");
   }
-};
+}
+function toggleLoader() {
+  const loaderHTML = document.querySelector(".loader");
+  const isHidden = loaderHTML.hasAttribute("hidden");
+  if (isHidden) {
+    loaderHTML.removeAttribute("hidden");
+  } else {
+    loaderHTML.setAttribute("hidden", "");
+  }
+}
 function validateNumber(numberValue, codeValue) {
   if (!numberValue || !codeValue) {
     errorMessage.innerHTML = "Number and/or Code could not be blank!";
@@ -38,7 +47,7 @@ function validateNumber(numberValue, codeValue) {
     errorMessage.innerHTML = "";
     numberPassed = true;
   }
-};
+}
 form.addEventListener("submit", function (event) {
   let numberValue = numberField.value;
   let codeValue = codeField.value;
@@ -46,9 +55,17 @@ form.addEventListener("submit", function (event) {
     toggleBorder(input);
   });
   validateNumber(numberValue, codeValue);
+
   if (numberPassed) {
-    modal_container.classList.add("show");
-  };
+    toggleLoader();
+    setTimeout(() => {
+      modal_container.classList.add("show");
+    }, 3000);
+    setTimeout(() => {
+      toggleLoader();
+    }, 3000);
+  }
+
   event.preventDefault();
 });
 function clearForm() {
@@ -56,7 +73,7 @@ function clearForm() {
   numberField.value = null;
   codeField.value = null;
   modal_container.classList.remove("show");
-};
+}
 closure.addEventListener("click", function () {
   inputs.hidden = true;
   clearForm();
